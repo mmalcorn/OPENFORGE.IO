@@ -2,7 +2,7 @@ pipeline {
   agent {
     docker {
       image 'node:8.10.0-alpine'
-      args '-v $HOME/userContent/$JOB_NAME:/www'
+      args '-v $HOME/userContent/$JOB_NAME:/'
     }
     
   }
