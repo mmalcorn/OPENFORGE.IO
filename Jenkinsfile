@@ -28,5 +28,6 @@ pipeline {
   }
   environment {
     ci = 'true'
+    HOME = '.'
   }
 }
