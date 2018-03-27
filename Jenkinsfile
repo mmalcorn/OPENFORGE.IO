@@ -2,7 +2,7 @@ pipeline {
   agent {
     docker {
       image 'node:8.10.0-alpine'
-      args '-v $HOME:~/openforge-io'
+      args '-v $HOME:${env.JOB_NAME}'
     }
     
   }
