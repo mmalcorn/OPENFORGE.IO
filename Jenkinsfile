@@ -1,7 +1,7 @@
 pipeline {
-  agent any
+  agent none
   stages {
-    stage('Install') {
+    stage('Test & Build') {
       agent {
         docker {
           image 'node:8-alpine'
@@ -13,15 +13,7 @@ pipeline {
       }
       steps {
         sh 'npm install'
-      }
-    }
-    stage('Test') {
-      steps {
         sh 'npm test'
-      }
-    }
-    stage('Build') {
-      steps {
         sh 'npm run build'
       }
     }
@@ -30,5 +22,8 @@ pipeline {
         sh 'aws s3 sync $WORKSPACE/www s3://of-jenkins-test/ --delete'
       }
     }
+  }
+  environment {
+    CI = 'true'
   }
 }
