@@ -12,18 +12,14 @@ pipeline {
         sh 'npm install'
       }
     }
+    stage('Test') {
+      steps {
+        sh 'npm test'
+      }
+    }
     stage('Build') {
-      parallel {
-        stage('Build') {
-          steps {
-            sh 'npm run build'
-          }
-        }
-        stage('Test') {
-          steps {
-            sh 'npm test'
-          }
-        }
+      steps {
+        sh 'npm run build'
       }
     }
   }
