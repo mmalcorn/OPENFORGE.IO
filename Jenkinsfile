@@ -18,12 +18,7 @@ pipeline {
       }
     }
     stage('Deploy') {
-      agent {
-        node {
-          label 'main'
-        }
-        
-      }
+      agent any
       steps {
         sh 'aws s3 sync $WORKSPACE/www s3://of-jenkins-test/ --delete'
       }
