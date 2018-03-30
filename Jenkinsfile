@@ -1,11 +1,5 @@
 pipeline {
-  agent {
-    docker {
-      image 'node:8.10.0-alpine'
-      args '-v $HOME/userContent/main-website:/www'
-    }
-    
-  }
+  agent any
   stages {
     stage('Install') {
       steps {
@@ -27,9 +21,5 @@ pipeline {
         sh 'aws s3 sync $WORKSPACE/www s3://of-jenkins-test/ --delete'
       }
     }
-  }
-  environment {
-    ci = 'true'
-    HOME = '.'
   }
 }
