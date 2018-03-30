@@ -22,6 +22,11 @@ pipeline {
         sh 'npm run build'
       }
     }
+    stage('Deploy') {
+      steps {
+        sh 'aws s3 sync $WORKSPACE/www s3://of-jenkins-test/ --delete'
+      }
+    }
   }
   environment {
     ci = 'true'
