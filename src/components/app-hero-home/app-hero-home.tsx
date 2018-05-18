@@ -1,4 +1,4 @@
-import { Component, Listen, Prop } from '@stencil/core';
+import { Component, Listen, Prop, Element } from '@stencil/core';
 
 @Component({
   tag: 'app-hero-home',
@@ -7,6 +7,7 @@ import { Component, Listen, Prop } from '@stencil/core';
 export class AppHeroHome {
   @Prop() textNoWrap: boolean;
   @Prop() hideLink: boolean;
+  @Element() host: HTMLElement;
 
   componentDidLoad() {
     this.handleImage();

@@ -212,7 +212,7 @@ export class AppAbout {
         </section>
 
         {/* team */}
-        <section id="team">
+        <section id="team" class="team">
           <div class="container">
             <h4>
               <div class="display-4 pb-3">Meet the Team</div>

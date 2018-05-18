@@ -1,28 +1,28 @@
 section {
-  padding: 6rem 0;
   @include media-breakpoint-down(sm) {
     padding: 5rem 0;
     text-align: center;
   }
-
+  padding: 6rem 0;
+  
   &.bg-gray {
     background: $gray-100;
   }
 
   h2 {
-    margin-bottom: 3rem;
-    text-align: center;
     @include media-breakpoint-down(sm) {
       margin-bottom: 1rem;
     }
+    margin-bottom: 3rem;
+    text-align: center;
   }
 
   .header-text {
-    font-size: 4rem;
-    text-align: center;
     @include media-breakpoint-down(sm) {
       margin-bottom: 1rem;
     }
+    font-size: 4rem;
+    text-align: center;
   }
 }
 
@@ -33,10 +33,10 @@ section {
   }
 
   a:first-child {
-    display: inline-block;
     @include media-breakpoint-down(sm) {
       margin-bottom: 3rem;
     }
+    display: inline-block;
   }
 
   figure {
@@ -69,38 +69,38 @@ section {
   }
 
   .services-selections {
-    align-items: center;
-    display: flex;
-    justify-content: space-around;
     @include media-breakpoint-down(sm) {
       display: block;
     }
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
   }
 
   .services-content {
-    align-items: center;
-    display: flex;
-    justify-content: center;
-    margin-bottom: 5rem;
     @include media-breakpoint-down(sm) {
       display: block;
     }
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 5rem;
 
     ul {
-      margin: 0 30px;
-      text-align: left;
-      width: 300px;
       @include media-breakpoint-down(sm) {
         margin: auto;
       }
+      margin: 0 30px;
+      text-align: left;
+      width: 300px;
     }
 
     img {
-      max-width: 400px;
       @include media-breakpoint-down(sm) {
         max-width: 300px;
         padding: 15px;
       }
+      max-width: 400px; 
     }
   }
 }

@@ -2,6 +2,7 @@
   "name": "@openforge/main-website",
   "private": true,
   "version": "0.1.0",
+  "sasslintConfig": "PATH/TO/YOUR/CONFIG/FILE",
   "description": "Website for OpenForge",
   "files": [
     "dist/"
@@ -22,11 +23,13 @@
     "npm": "5.6.0"
   },
   "dependencies": {
-    "@stencil/core": "^0.7.26",
-    "@stencil/router": "^0.1.0",
+    "@stencil/core": "^0.9.1",
+    "@stencil/router": "^0.1.7",
     "bootstrap": "^4.1.0",
+    "csslint": "^1.0.5",
     "express": "^4.16.3",
     "helmet": "^3.12.1",
+    "node": "^10.0.0",
     "smoothscroll-polyfill": "^0.4.3"
   },
   "devDependencies": {
@@ -36,15 +39,16 @@
     "@stencil/dev-server": "latest",
     "@stencil/sass": "0.0.3",
     "@stencil/utils": "latest",
-    "@types/jest": "^21.1.10",
+    "@types/jest": "^22.1.2",
     "@types/smoothscroll-polyfill": "^0.3.0",
     "commitizen": "^2.9.6",
     "conventional-changelog-cli": "^1.3.22",
     "cz-conventional-changelog": "^2.1.0",
     "husky": "^0.15.0-rc.13",
-    "jest": "^21.2.1",
+    "jest": "^22.1.2",
     "lint-staged": "^7.0.4",
     "prettier": "^1.12.1",
+    "sass-lint": "^1.12.1",
     "tslint": "^5.9.1",
     "tslint-config-airbnb": "^5.8.0",
     "tslint-config-prettier": "^1.12.0",
@@ -80,7 +84,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged",
+      "pre-commit": "npm test && lint-staged",
       "commit-msg": "commitlint -e $GIT_PARAMS"
     }
   },

@@ -1,4 +1,4 @@
-import { Component, Prop } from '@stencil/core';
+import { Component, Prop, Element } from '@stencil/core';
 
 @Component({
   tag: 'app-hero',
@@ -9,6 +9,7 @@ export class AppHero {
   @Prop() backgroundUrl: string;
   @Prop() textNoWrap: boolean;
   @Prop() hideLink: boolean;
+  @Element() host: Element;
 
   componentDidLoad() {
     const element = document.querySelector('header.hero') as HTMLElement;
