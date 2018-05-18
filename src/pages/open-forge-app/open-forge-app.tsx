@@ -1,4 +1,4 @@
-import { Component, Listen, Prop } from '@stencil/core';
+import { Component, Listen, Prop, Element} from '@stencil/core';
 import { ActiveRouter, RouterHistory, LocationSegments } from '@stencil/router';
 
 import { polyfill } from 'smoothscroll-polyfill';
@@ -23,9 +23,10 @@ export class OpenForgeApp {
   componentDidLoad() {
     gtag('js', new Date());
 
+    console.log("Trying to document.query in open-forge-app.tsx");
     this.navbarEl = document.querySelector('nav.navbar');
     this.mainEl = document.querySelector('main');
-
+    
     const history: RouterHistory = this.activeRouter.get('history');
     gtag('config', GA_TRACKING_ID, { page_path: history.location.pathname });
 

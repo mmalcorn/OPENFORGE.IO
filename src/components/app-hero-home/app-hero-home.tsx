@@ -16,6 +16,7 @@ export class AppHeroHome {
   // will refactor in the future
   @Listen('window:resize')
   handleImage() {
+    console.log("app-hero-home query selector");
     const element = document.querySelector('header.hero-home') as HTMLElement;
     if (window.innerWidth < 576) {
       // small

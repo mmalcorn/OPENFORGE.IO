@@ -12,6 +12,7 @@ export class AppHero {
   @Element() host: Element;
 
   componentDidLoad() {
+    console.log("app-hero query selector");
     const element = document.querySelector('header.hero') as HTMLElement;
     element.style.backgroundImage = `url('${this.backgroundUrl}')`;
   }

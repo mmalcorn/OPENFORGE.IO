@@ -133,6 +133,7 @@ export class AppAbout {
     hrefArray.forEach(anchor => {
       anchor.addEventListener('click', function(e) {
         e.preventDefault();
+        console.log("Inside query selector for app-about.tsx");
         document.querySelector(this.getAttribute('href')).scrollIntoView({
           behavior: 'smooth',
         });

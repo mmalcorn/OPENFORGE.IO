@@ -19,7 +19,7 @@ export class AppHeader {
       );
       button['0'].style.visibility = 'hidden';
     }
-
+    console.log("The other app-header query selector)");
     this.scrollElement = document.querySelector(this.linkUrl) as HTMLInputElement;
   }
 

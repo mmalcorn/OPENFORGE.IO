@@ -10,6 +10,7 @@ export class AppHome {
     hrefArray.forEach(anchor => {
       anchor.addEventListener('click', function(e) {
         e.preventDefault();
+        console.log("query selector in App.home");
         document.querySelector(this.getAttribute('href')).scrollIntoView({
           behavior: 'smooth',
         });

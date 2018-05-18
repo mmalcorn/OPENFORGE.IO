@@ -25,6 +25,7 @@ export class AppContact {
     hrefArray.forEach(anchor => {
       anchor.addEventListener('click', function(e) {
         e.preventDefault();
+        console.log("Trying to document.query in app-contact.tsx");
         document.querySelector(this.getAttribute('href')).scrollIntoView({
           behavior: 'smooth',
         });
