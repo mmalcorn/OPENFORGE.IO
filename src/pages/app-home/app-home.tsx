@@ -18,7 +18,7 @@ export class AppHome {
         });
       });
     } catch (e) {
-      console.error('caught error componentDidLoad app-home', e);
+      console.error('caught error component app-home', e);
     }
   }
 
