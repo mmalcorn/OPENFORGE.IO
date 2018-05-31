@@ -26,6 +26,6 @@ exports.config = {
 
 exports.devServer = {
   root: 'www',
-  httpPort: 'process.env.PORT',
+  httpPort: '$PORT',
   watchGlob: '**/**'
 };
