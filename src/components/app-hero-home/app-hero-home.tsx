@@ -7,6 +7,9 @@ import { Component, Listen, Prop } from '@stencil/core';
 export class AppHeroHome {
   @Prop() textNoWrap: boolean;
 
+  componentWillLoad() {
+    console.log('Component will load, app-hero-home');
+  }
   componentDidLoad() {
     this.handleImage();
   }

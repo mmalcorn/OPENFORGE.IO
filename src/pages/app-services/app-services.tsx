@@ -1,10 +1,21 @@
-import { Component } from '@stencil/core';
+import { Component, Prop, State } from '@stencil/core';
 
 @Component({
   tag: 'app-services',
   styleUrl: 'app-services.scss',
 })
 export class AppServices {
+  @Prop() match: any;
+
+  @State() name: string;
+
+  componentWillLoad() {
+    console.log('app-services ComponentWillLoad()');
+    if (!!this.match.params.name) {
+      this.name = this.match.params.name;
+    }
+  }
+
   render() {
     return (
       <div>

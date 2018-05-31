@@ -1,4 +1,4 @@
-import { Component, State, Listen } from '@stencil/core';
+import { Component, State, Listen, Prop } from '@stencil/core';
 
 @Component({
   tag: 'app-opportunities',
@@ -9,6 +9,17 @@ export class AppOpportunities {
   @State() canRequestInterview: boolean;
   @State() formSubmitting: boolean = false;
   @State() formSubmitted: boolean = false;
+
+  @Prop() match: any;
+
+  @State() name: string;
+
+  componentWillLoad() {
+    console.log('app-opportunities ComponentWillLoad()');
+    if (!!this.match.params.name) {
+      this.name = this.match.params.name;
+    }
+  }
 
   formValues: {
     angular: number;

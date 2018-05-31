@@ -1,4 +1,4 @@
-import { Component, State, Listen } from '@stencil/core';
+import { Component, State, Listen, Prop } from '@stencil/core';
 
 @Component({
   tag: 'app-contact',
@@ -8,6 +8,17 @@ export class AppContact {
   @State() formSubmitted = false;
 
   @State() formSubmitting = false;
+
+  @Prop() match: any;
+
+  @State() name: string;
+
+  componentWillLoad() {
+    console.log('app-contact ComponentWillLoad()');
+    if (!!this.match.params.name) {
+      this.name = this.match.params.name;
+    }
+  }
 
   formValues: {
     name: string;

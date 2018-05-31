@@ -1,10 +1,11 @@
 const sass = require('@stencil/sass');
+
 exports.config = {
   plugins: [
     sass({
       injectGlobalPaths: [
         'src/styles/_variables.scss',
-        'src/styles/_mixins.scss',
+        'src/styles/_mixins.scss'
       ]
     })
   ],
@@ -12,16 +13,19 @@ exports.config = {
     {
       type: 'www',
       serviceWorker: {
-        swSrc: 'sw.js',
+        swSrc: 'src/sw.js',
         globPatterns: [
-          '**/*.{html,js,css,json,ico,png,es5}'
+          '**/*.{html,js,css,json,ico,png}'
         ]
       }
     }
   ],
+  globalStyle: 'src/styles/main.scss',
+  enableCache: false
 };
 
 exports.devServer = {
   root: 'www',
+  httpPort: 'process.env.PORT',
   watchGlob: '**/**'
 };

@@ -13,9 +13,12 @@ declare global {
   }
   namespace JSXElements {}
 
+  interface HTMLElement {
+    componentOnReady?: () => Promise<this | null>;
+  }
+
   interface HTMLStencilElement extends HTMLElement {
     componentOnReady(): Promise<this>;
-    componentOnReady(done: (ele?: this) => void): void;
 
     forceUpdate(): void;
   }
@@ -459,7 +462,7 @@ declare global {
 
   namespace StencilComponents {
     interface AppContact {
-
+      'match': any;
     }
   }
 
@@ -482,7 +485,7 @@ declare global {
   }
   namespace JSXElements {
     export interface AppContactAttributes extends HTMLAttributes {
-
+      'match'?: any;
     }
   }
 }
@@ -492,7 +495,7 @@ declare global {
 
   namespace StencilComponents {
     interface AppHome {
-
+      'match': any;
     }
   }
 
@@ -515,7 +518,7 @@ declare global {
   }
   namespace JSXElements {
     export interface AppHomeAttributes extends HTMLAttributes {
-
+      'match'?: any;
     }
   }
 }
@@ -525,7 +528,7 @@ declare global {
 
   namespace StencilComponents {
     interface AppOpportunities {
-
+      'match': any;
     }
   }
 
@@ -548,7 +551,7 @@ declare global {
   }
   namespace JSXElements {
     export interface AppOpportunitiesAttributes extends HTMLAttributes {
-
+      'match'?: any;
     }
   }
 }
@@ -558,7 +561,7 @@ declare global {
 
   namespace StencilComponents {
     interface AppServices {
-
+      'match': any;
     }
   }
 
@@ -581,7 +584,7 @@ declare global {
   }
   namespace JSXElements {
     export interface AppServicesAttributes extends HTMLAttributes {
-
+      'match'?: any;
     }
   }
 }

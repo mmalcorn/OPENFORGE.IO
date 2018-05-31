@@ -1,10 +1,42 @@
-import { Component } from '@stencil/core';
+import { Component, Prop, State } from '@stencil/core';
+// https://github.com/ionic-team/stencil-router/issues/15
 
 @Component({
   tag: 'app-home',
   styleUrl: 'app-home.scss',
 })
 export class AppHome {
+  @Prop() match: any;
+
+  @State() name: string;
+
+  componentWillLoad() {
+    console.log('app-home Component Will Load');
+    if (!!this.match.params.name) {
+      this.name = this.match.params.name;
+    }
+  }
+
+  componentDidLoad() {
+    let hrefArray;
+    try {
+      hrefArray = Array.from(document.querySelectorAll('a[href^="#"]'));
+      hrefArray.forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+          e.preventDefault();
+          const element = document.querySelector(this.getAttribute('href'));
+          element &&
+            element.scrollIntoView({
+              block: 'start',
+              behavior: 'smooth',
+            });
+        });
+      });
+    } catch (e) {
+      console.error('caught error componentDidLoad app-home', e);
+    }
+  }
+
   members = [
     {
       name: 'Jedi Weller',
@@ -127,26 +159,6 @@ export class AppHome {
       github: '',
     },
   ];
-
-  componentDidLoad() {
-    let hrefArray;
-    try {
-      hrefArray = Array.from(document.querySelectorAll('a[href^="#"]'));
-      hrefArray.forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-          e.preventDefault();
-          const element = document.querySelector(this.getAttribute('href'));
-          element &&
-            element.scrollIntoView({
-              block: 'start',
-              behavior: 'smooth',
-            });
-        });
-      });
-    } catch (e) {
-      console.error('caught error componentDidLoad app-home', e);
-    }
-  }
 
   render() {
     return (

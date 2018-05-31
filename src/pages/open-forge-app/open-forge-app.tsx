@@ -1,14 +1,9 @@
-import { Component, Prop, Listen } from '@stencil/core';
-import {
-  ActiveRouter,
-  RouterHistory,
-  LocationSegments,
-  RouterSwitch,
-} from '@stencil/router';
+import { Component, Listen } from '@stencil/core';
+import '@stencil/router';
 
 import { polyfill } from 'smoothscroll-polyfill';
 
-import { gtag, GA_TRACKING_ID } from '../../shared/gtag';
+import { gtag } from '../../shared/gtag';
 
 polyfill();
 
@@ -30,6 +25,7 @@ export class OpenForgeApp {
   // TODO: Figure out toast message alternative
   @Listen('window:swUpdate')
   async onSWUpdate() {
+    console.log('onSWUpdate');
     // const toast = await this.toastCtrl.create({
     //   message: 'New version available',
     //   showCloseButton: true,
@@ -40,59 +36,40 @@ export class OpenForgeApp {
     window.location.reload();
   }
 
-  @Prop({ context: 'activeRouter' })
-  activeRouter: ActiveRouter;
-  unsubscribe: () => void;
-  mainEl: HTMLElement;
-
-  componentDidUnload() {
-    this.unsubscribe();
-  }
-
   componentDidLoad() {
     gtag('js', new Date());
-    try {
-      this.mainEl = document.querySelector('main');
-    } catch (e) {
-      console.error('caught error componentDidLoad open-forge-app', e);
-    }
 
-    const history: RouterHistory = this.activeRouter.get('history');
-    gtag('config', GA_TRACKING_ID, { page_path: history.location.pathname });
+    // const history: RouterHistory = this.activeRouter.get('history');
+    // gtag('config', GA_TRACKING_ID, { page_path: history.location.pathname });
 
-    this.unsubscribe = history.listen((segments: LocationSegments) => {
-      console.log(segments);
-      gtag('config', GA_TRACKING_ID, { page_path: segments.pathname });
+    // this.unsubscribe = history.listen((segments: LocationSegments) => {
+    //   console.log(segments);
+    //   gtag('config', GA_TRACKING_ID, { page_path: segments.pathname });
 
-      if (segments.hash !== '') {
-        const sectionId = segments.hash.replace('#', '');
-        setTimeout(() => {
-          document.getElementById(sectionId).scrollIntoView({
-            block: 'start',
-            behavior: 'smooth',
-          });
-        }, 250);
-      }
-    });
+    //   if (segments.hash !== '') {
+    //     const sectionId = segments.hash.replace('#', '');
+    //     setTimeout(() => {
+    //       document.getElementById(sectionId).scrollIntoView({
+    //         block: 'start',
+    //         behavior: 'smooth',
+    //       });
+    //     }, 250);
+    //   }
+    // });
   }
 
   render() {
     return (
       <div>
         <app-nav-header />
-        <main>
-          <stencil-router>
-            <RouterSwitch scrollTopOffset={0}>
-              <stencil-route url="/" component="app-home" exact={true} />
-              <stencil-route url="/services" component="app-services" />
-              <stencil-route url="/contact" component="app-contact" />
-              <stencil-route
-                url="/opportunities"
-                component="app-opportunities"
-              />
-            </RouterSwitch>
-          </stencil-router>
-        </main>
+        <stencil-router>
+          <stencil-router-switch scrollTopOffset={0}>
+            <stencil-route component="app-home" exact={true} />
+            <stencil-route url="/services" component="app-services" />
+            <stencil-route url="/contact" component="app-contact" />
+            <stencil-route url="/opportunities" component="app-opportunities" />
+          </stencil-router-switch>
+        </stencil-router>
         <app-footer />
       </div>
     );
