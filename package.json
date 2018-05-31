@@ -12,7 +12,7 @@
     "dev": "sd concurrent \"stencil build --dev --prerender --no-cache --watch\" \"stencil-dev-server\" ",
     "lint": "tslint -p ./tsconfig.json --exclude '**/*.d.ts'",
     "serve": "stencil-dev-server",
-    "start": "npm run build && node index.js",
+    "start": "npm run dev",
     "test": "jest --no-cache",
     "test.watch": "jest --watch --no-cache",
     "version": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md",
@@ -91,11 +91,11 @@
     }
   },
   "lint-staged": {
-    "src/**/*.{js,jsx,ts,tsx}": [
+    "src/**/*.{jsx,ts,tsx}": [
       "npm run lint",
       "git add"
     ],
-    "src/**/*.{js,jsx,ts,tsx,css,scss}": [
+    "src/**/*.{jsx,ts,tsx,css,scss}": [
       "prettier --write",
       "git add"
     ]
