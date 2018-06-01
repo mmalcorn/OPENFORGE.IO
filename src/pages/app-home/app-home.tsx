@@ -1,4 +1,4 @@
-import { Component, Prop, State } from '@stencil/core';
+import { Component, Prop, Element, State } from '@stencil/core';
 // https://github.com/ionic-team/stencil-router/issues/15
 
 @Component({
@@ -6,6 +6,7 @@ import { Component, Prop, State } from '@stencil/core';
   styleUrl: 'app-home.scss',
 })
 export class AppHome {
+  @Element() el: Element;
   @Prop() match: any;
 
   @State() name: string;
@@ -20,11 +21,11 @@ export class AppHome {
   componentDidLoad() {
     let hrefArray;
     try {
-      hrefArray = Array.from(document.querySelectorAll('a[href^="#"]'));
+      hrefArray = Array.from(this.el.querySelectorAll('a[href^="#"]'));
       hrefArray.forEach(anchor => {
         anchor.addEventListener('click', function(e) {
           e.preventDefault();
-          const element = document.querySelector(this.getAttribute('href'));
+          const element = this.el.querySelector(this.getAttribute('href'));
           element &&
             element.scrollIntoView({
               block: 'start',

@@ -1,17 +1,19 @@
-import { Component, Listen } from '@stencil/core';
+import { Component, Listen, Element } from '@stencil/core';
 @Component({
   tag: 'app-nav-header',
   styleUrl: 'app-nav-header.scss',
 })
 export class AppNavHeader {
+  @Element() el: Element;
+
   mainEl: HTMLElement;
   navbarEl: HTMLElement;
   isScrolled = false;
 
   componentDidLoad() {
     try {
-      this.mainEl = document.querySelector('main');
-      this.navbarEl = document.querySelector('nav.navbar');
+      this.mainEl = this.el.querySelector('main') as HTMLElement;
+      this.navbarEl = this.el.querySelector('nav.navbar') as HTMLElement;
     } catch (e) {
       console.error('caught error ', e);
     }
@@ -61,7 +63,6 @@ export class AppNavHeader {
               <li class="nav-item" data-target="#navbarSupportedContent">
                 <stencil-route-link
                   url="/"
-                  exact={true}
                   anchorClass="nav-link"
                   activeClass="active"
                 >

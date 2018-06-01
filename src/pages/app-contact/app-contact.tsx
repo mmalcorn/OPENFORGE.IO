@@ -1,10 +1,11 @@
-import { Component, State, Listen, Prop } from '@stencil/core';
+import { Component, State, Listen, Prop, Element } from '@stencil/core';
 
 @Component({
   tag: 'app-contact',
   styleUrl: 'app-contact.scss',
 })
 export class AppContact {
+  @Element() el: Element;
   @State() formSubmitted = false;
 
   @State() formSubmitting = false;
@@ -33,7 +34,7 @@ export class AppContact {
   componentDidLoad() {
     this.resetFormValues();
     let element;
-    element = document.querySelector('.contact .hero');
+    element = this.el.querySelector('.contact .hero') as HTMLElement;
     element.style.backgroundImage = `url('assets/bg-hero-handshake-desk.jpg')`;
   }
 
@@ -97,7 +98,7 @@ export class AppContact {
   }
 
   scrollToForm() {
-    const form = document.getElementById('second-content');
+    const form = this.el.querySelector('second-content') as HTMLElement;
 
     form.scrollIntoView({ block: 'start', behavior: 'smooth' });
   }

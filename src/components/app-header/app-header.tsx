@@ -1,10 +1,11 @@
-import { Component, Prop } from '@stencil/core';
+import { Component, Prop, Element } from '@stencil/core';
 
 @Component({
   tag: 'app-header',
   styleUrl: 'app-header.scss',
 })
 export class AppHeader {
+  @Element() el: Element;
   @Prop() linkUrl: string;
   @Prop() backgroundUrl: string;
   @Prop() hideButton: boolean = false;
@@ -13,13 +14,13 @@ export class AppHeader {
 
   componentDidLoad() {
     if (this.hideButton) {
-      const button = document.getElementsByClassName(
+      const button = this.el.querySelector(
         'btn btn-primary btn-arrow'
-      );
+      ) as HTMLElement;
       button['0'].style.visibility = 'hidden';
     }
     try {
-      this.scrollElement = document.querySelector(this.linkUrl);
+      this.scrollElement = this.el.querySelector(this.linkUrl) as HTMLElement;
     } catch (e) {
       console.log('app-header error ', e);
     }

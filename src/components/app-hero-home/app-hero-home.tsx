@@ -1,10 +1,11 @@
-import { Component, Listen, Prop } from '@stencil/core';
+import { Component, Listen, Prop, Element } from '@stencil/core';
 
 @Component({
   tag: 'app-hero-home',
   styleUrl: 'app-hero-home.scss',
 })
 export class AppHeroHome {
+  @Element() el: Element;
   @Prop() textNoWrap: boolean;
 
   componentWillLoad() {
@@ -20,8 +21,10 @@ export class AppHeroHome {
     let element;
     let element2;
     try {
-      element = document.querySelector('header.hero-home');
-      element2 = document.querySelector('header.hero-home .content');
+      element = this.el.querySelector('header.hero-home') as HTMLElement;
+      element2 = this.el.querySelector(
+        'header.hero-home .content'
+      ) as HTMLElement;
     } catch (e) {
       console.log('app-hero-home undefined', e);
     }

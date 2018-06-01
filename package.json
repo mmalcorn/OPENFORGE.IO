@@ -7,12 +7,11 @@
     "dist/"
   ],
   "scripts": {
-    "build": "stencil build --prerender",
+    "build": "stencil build --prod",
     "cz": "git-cz",
-    "dev": "sd concurrent \"stencil build --dev --prerender --no-cache --watch\" \"stencil-dev-server\" ",
+    "dev": "sd concurrent \"stencil build --dev --prerender --no-cache\" \"node server/stencil-dev-server\" ",
     "lint": "tslint -p ./tsconfig.json --exclude '**/*.d.ts'",
-    "serve": "stencil-dev-server",
-    "start": "npm run build && node index.js",
+    "start": "npm run dev",
     "test": "jest --no-cache",
     "test.watch": "jest --watch --no-cache",
     "version": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md",
@@ -25,15 +24,20 @@
     "npm": "5.6.0"
   },
   "dependencies": {
-    "@stencil/core": "^0.9.1",
-    "@stencil/router": "^0.1.7",
+    "@stencil/core": "^0.9.6",
+    "@stencil/router": "^0.2.0",
     "@stencil/sass": "0.0.3",
-    "@stencil/dev-server": "latest",
     "@stencil/utils": "latest",
     "bootstrap": "^4.1.0",
     "express": "^4.16.3",
     "helmet": "^3.12.1",
-    "smoothscroll-polyfill": "^0.4.3"
+    "smoothscroll-polyfill": "^0.4.3",
+    "@ionic/discover": "^0.3.3",
+    "chokidar": "^1.7.0",
+    "devcert-san": "^0.3.3",
+    "ecstatic": "^2.2.1",
+    "opn": "^5.1.0",
+    "tiny-lr": "^1.0.5"
   },
   "devDependencies": {
     "@angular/cli": "^6.0.0",

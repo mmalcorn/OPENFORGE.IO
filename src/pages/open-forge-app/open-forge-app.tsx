@@ -1,5 +1,5 @@
-import { Component, Listen } from '@stencil/core';
 import '@stencil/router';
+import { Component, Element, Listen } from '@stencil/core';
 
 import { polyfill } from 'smoothscroll-polyfill';
 
@@ -12,6 +12,8 @@ polyfill();
   styleUrl: 'open-forge-app.scss',
 })
 export class OpenForgeApp {
+  @Element() el: HTMLElement;
+
   /**
    * Handle service worker updates correctly.
    * This code will show a toast letting the
@@ -33,7 +35,7 @@ export class OpenForgeApp {
     // });
     // await toast.present();
     // await toast.onWillDismiss()
-    window.location.reload();
+    // window.location.reload();
   }
 
   componentDidLoad() {

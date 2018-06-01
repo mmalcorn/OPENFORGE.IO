@@ -1,10 +1,11 @@
-import { Component, State, Listen, Prop } from '@stencil/core';
+import { Component, State, Listen, Prop, Element } from '@stencil/core';
 
 @Component({
   tag: 'app-opportunities',
   styleUrl: 'app-opportunities.scss',
 })
 export class AppOpportunities {
+  @Element() el: Element;
   @State() isDisabled: boolean = true;
   @State() canRequestInterview: boolean;
   @State() formSubmitting: boolean = false;
@@ -39,16 +40,17 @@ export class AppOpportunities {
   componentDidLoad() {
     this.resetFormValues();
     let element;
-    element = document.querySelector('.opportunities .hero');
+    element = this.el.querySelector('.opportunities .hero') as HTMLElement;
     element.style.backgroundImage = `url('assets/bg-hero-mountain.jpg')`;
   }
 
   componentDidUpdate() {
     if (!this.isDisabled) {
-      if (document.getElementById('requestInterview')) {
-        document.getElementById('requestInterview').focus();
+      if (this.el.querySelector('requestInterview')) {
+        const x = this.el.querySelector('requestInterview') as HTMLElement;
+        x.focus();
       } else {
-        document.getElementById('apply').scrollIntoView({
+        this.el.querySelector('apply').scrollIntoView({
           block: 'start',
           behavior: 'smooth',
         });
