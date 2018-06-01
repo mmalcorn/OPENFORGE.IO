@@ -26,7 +26,7 @@ const optionInfo = {
         type: String
     },
     verbose: {
-        default: false,
+        default: true,
         type: Boolean
     },
     html5mode: {

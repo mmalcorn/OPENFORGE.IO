@@ -1,5 +1,6 @@
 #! /usr/bin/env node
 'use strict';
+console.log('Inside custom stencil-dev-server');
 
 process.title = 'stencil-dev-server';
 process.on('unhandledRejection', function(r) { console.error(r) });
