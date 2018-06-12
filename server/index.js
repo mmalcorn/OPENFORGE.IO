@@ -63,8 +63,10 @@ const optionInfo = {
     }
 };
 function run(argv) {
+    console.log("These are the arguments: ", argv);
     return __awaiter(this, void 0, void 0, function* () {
         const cliDefaultedOptions = utils_1.parseOptions(optionInfo, argv);
+        console.log("cliDefaultedOptions: ", cliDefaultedOptions);
         cliDefaultedOptions.additionalJsScripts = cliDefaultedOptions.additionalJsScripts
             .split(',')
             .filter((name) => !!name);
