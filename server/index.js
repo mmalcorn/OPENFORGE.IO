@@ -58,7 +58,7 @@ const optionInfo = {
         type: String
     },
     ssl: {
-        default: false,
+        default: true,
         type: Boolean
     }
 };
@@ -87,11 +87,11 @@ function run(argv) {
         log(isVerbose, `Will serve requests using : ${protocol}`);
         const wwwRoot = path.resolve(options.root);
         const browserUrl = getAddressForBrowser(options.address);
-        const [tinyLrServer, lrScriptLocation, emitLiveReloadUpdate] = yield createLiveReload(foundLiveReloadPort, options.address, wwwRoot, options.ssl);
+        const [tinyLrServer, lrScriptLocation, emitLiveReloadUpdate] = yield createLiveReload(foundLiveReloadPort, options.address, wwwRoot, options.ssl); // Live Reload
         const jsScriptLocations = options.additionalJsScripts
             .map((filePath) => filePath.trim())
             .concat(lrScriptLocation);
-        const fileWatcher = createFileWatcher(wwwRoot, options.watchGlob, emitLiveReloadUpdate, isVerbose);
+        const fileWatcher = createFileWatcher(wwwRoot, options.watchGlob, emitLiveReloadUpdate, isVerbose); // File Watcher
         log(isVerbose, `watching: ${wwwRoot} ${options.watchGlob}`);
         const requestHandler = createHttpRequestHandler(wwwRoot, jsScriptLocations, options.html5mode);
         const httpServer = options.ssl ? https.createServer(yield utils_1.getSSL(), requestHandler).listen(foundHttpPort)
