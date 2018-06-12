@@ -58,7 +58,7 @@ const optionInfo = {
         type: String
     },
     ssl: {
-        default: true,
+        default: false,
         type: Boolean
     }
 };
