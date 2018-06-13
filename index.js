@@ -1,5 +1,5 @@
 /**
- *  This is the entry point for our Node Express server for OpenForge.io 
+ *  This is the entry point for our Node Express server for OpenForge.io
  *  Since Stencil is simply providing web components, we need a way to serve these to our Heroku instance.
  *  In Package.json, we include a heroku-postbuild script that runs our express server; and our express server
  *  serves the static files that are built by npm build.
@@ -8,8 +8,16 @@
 const express = require('express');
 const stencil = require('@stencil/core/server');
 
+const prerenderNode = require('prerender-node');
+
 // create the express app
 const app = express();
+
+// Use Prerender
+// app.use(prerenderNode).set('prerenderToken', 'F79FJmRZUXM4QPmcf8P0')
+
+/*  For testing prerender.io -- locally */
+app.use(prerenderNode.set('prerenderServiceUrl'), 'https://localhost:3333/').set('prerenderToken', 'F79FJmRZUXM4QPmcf8P0');
 
 // load the stencil config and
 // express serve-side rendering middleware
