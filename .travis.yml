@@ -8,8 +8,15 @@ cache:
     - ~/.npm
     - node_modules
 
+deploy:
+  provider: firebase
+  token:
+    secure: "ENCRYPT TOKEN"
+
 install:
 - npm install
+
+before_deploy: "echo 'ready?'"
 
 before_script:
 - npm start -- --silent &

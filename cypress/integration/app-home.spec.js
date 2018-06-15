@@ -1,6 +1,6 @@
 describe('Home Page', function () {
   beforeEach(() => {
-    cy.visit('localhost:3333/')
+    cy.visit('https://openforge-dev.firebaseapp.com/')
     cy.get('nav > div > button').as('burgerMenu')
   })
   describe('Navigation', function () {

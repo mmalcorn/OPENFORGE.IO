@@ -2,69 +2,69 @@
   "namespace": "App",
   "fsNamespace": "app",
   "loader": "../app.js",
+  "corePolyfilled": "es5-build-disabled.js",
   "global": "app.global.js",
-  "core": "app.mjs71ypv.js",
-  "corePolyfilled": "app.g281kf6y.js",
+  "core": "app.core.js",
   "components": {
     "app-contact": {
-      "$": "kehxa912"
+      "$": "app-contact"
     },
     "app-cta": {
-      "$": "uqm08pto"
+      "$": "app-cta"
     },
     "app-footer": {
-      "$": "e3d5akmu"
+      "$": "app-footer"
     },
     "app-header": {
-      "$": "dvinjver"
+      "$": "app-header"
     },
     "app-hero-home": {
-      "$": "csndfjsr"
+      "$": "app-hero-home"
     },
     "app-home": {
-      "$": "csndfjsr"
+      "$": "app-hero-home"
     },
     "app-img": {
-      "$": "zfwj7rd9"
+      "$": "app-img"
     },
     "app-input": {
-      "$": "5jffiobg"
+      "$": "app-input"
     },
     "app-members": {
-      "$": "csndfjsr"
+      "$": "app-hero-home"
     },
     "app-nav-header": {
-      "$": "e3d5akmu"
+      "$": "app-footer"
     },
     "app-opportunities": {
-      "$": "n1sjoee1"
+      "$": "app-opportunities"
     },
     "app-radio": {
-      "$": "kehxa912"
+      "$": "app-contact"
     },
     "app-services": {
-      "$": "eza2dcb3"
+      "$": "app-services"
     },
     "app-slider": {
-      "$": "n1sjoee1"
+      "$": "app-opportunities"
     },
     "content-graphic": {
-      "$": "hkdx4yt1"
+      "$": "content-graphic"
     },
     "content-graphic-lg": {
-      "$": "veh3qlrq"
+      "$": "content-graphic-lg"
     },
     "open-forge-app": {
-      "$": "e3d5akmu"
+      "$": "app-footer"
     },
     "stencil-route": {
-      "$": "e3d5akmu"
+      "$": "app-footer"
     },
     "stencil-route-link": {
-      "$": "o9hbiai1"
+      "$": "stencil-route-link"
     },
     "stencil-router": {
-      "$": "e3d5akmu"
+      "$": "app-footer"
     }
   }
 }

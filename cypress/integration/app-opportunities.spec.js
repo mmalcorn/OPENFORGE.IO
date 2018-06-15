@@ -1,6 +1,6 @@
 describe('Opportunities Page', function () {
   beforeEach(() => {
-    cy.visit('localhost:3333/opportunities')
+    cy.visit('https://openforge-dev.firebaseapp.com/opportunities')
     cy.get('button[type=submit]').as('submitBtn')
   })
 

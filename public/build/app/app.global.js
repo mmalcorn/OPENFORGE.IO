@@ -1,5 +1,181 @@
 /*! Built with http://stenciljs.com */
 (function(namespace,resourcesUrl){"use strict";
-(function(resourcesUrl){var t=Object.prototype.hasOwnProperty;function n(t,n){return t===n?0!==t||0!==n||1/t==1/n:t!=t&&n!=n}function e(e,o){if(n(e,o))return!0;if("object"!=typeof e||null===e||"object"!=typeof o||null===o)return!1;var r=Object.keys(e),u=Object.keys(o);if(r.length!==u.length)return!1;for(var c=0;c<r.length;c++)if(!t.call(o,r[c])||!n(e[r[c]],o[r[c]]))return!1;return!0}var o=function(t,n,e,o){return new(e||(e=Promise))(function(r,u){function c(t){try{i(o.next(t))}catch(t){u(t)}}function l(t){try{i(o.throw(t))}catch(t){u(t)}}function i(t){t.done?r(t.value):new e(function(n){n(t.value)}).then(c,l)}i((o=o.apply(t,n||[])).next())})};Context.activeRouter=function(){let t={};const n=[];function r(n){return 0===Object.keys(t).length?{location:{pathname:Context.window.location.pathname,search:Context.window.location.search}}:n?t[n]:t}function u(){return o(this,void 0,void 0,function*(){const t=n,o=[],u=r("location").pathname;for(let n=0;n<t.length;n++){let r=null;const c=o.some(e=>null!=e[1]&&null!=e[2]&&e[2]===t[n].groupId);r=c?null:t[n].isMatch(u),e(t[n].lastMatch,r)||(!c&&t[n].groupId?o.unshift([n,r,t[n].groupId]):o.push([n,r,t[n].groupId])),t[n].lastMatch=r}for(const[n,e,r]of o)r&&null!=e?yield t[n].listener(e):t[n].listener(e)})}return{set:function(n){t=Object.assign({},t,n),u()},get:r,subscribe:function(t){!function(t){const e=r("location").pathname,o=t.isMatch(e);if(t.lastMatch=o,t.listener(o),null==t.groupId||null==t.groupIndex||0===n.length)n.push(t);else for(let e=0;e<n.length;e++){const{groupId:o,groupIndex:r}=n[e];if(null==o){n.splice(e,0,t);break}if(o===t.groupId&&r>t.groupIndex){n.splice(e,0,t);break}}}(t);let e=!0;return function(){e&&(function(t){const e=n.indexOf(t);n.splice(e,1)}(t),e=!1)}},dispatch:u}}();
+(function(resourcesUrl){
+    /** @stencil/router global **/
+
+    /**
+     * Copyright (c) 2013-present, Facebook, Inc.
+     *
+     * This source code is licensed under the MIT license found in the
+     * LICENSE file in the root directory of this source tree.
+     *
+     * @typechecks
+     *
+     */
+    var hasOwnProperty = Object.prototype.hasOwnProperty;
+    /**
+     * inlined Object.is polyfill to avoid requiring consumers ship their own
+     * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is
+     */
+    function is(x, y) {
+        // SameValue algorithm
+        if (x === y) {
+            // Steps 1-5, 7-10
+            // Steps 6.b-6.e: +0 != -0
+            // Added the nonzero y check to make Flow happy, but it is redundant
+            return x !== 0 || y !== 0 || 1 / x === 1 / y;
+        }
+        else {
+            // Step 6.a: NaN == NaN
+            return x !== x && y !== y;
+        }
+    }
+    /**
+     * Performs equality by iterating through keys on an object and returning false
+     * when any key has values which are not strictly equal between the arguments.
+     * Returns true when the values of all keys are strictly equal.
+     */
+    function shallowEqual(objA, objB) {
+        if (is(objA, objB)) {
+            return true;
+        }
+        if (typeof objA !== 'object' || objA === null || typeof objB !== 'object' || objB === null) {
+            return false;
+        }
+        var keysA = Object.keys(objA);
+        var keysB = Object.keys(objB);
+        if (keysA.length !== keysB.length) {
+            return false;
+        }
+        // Test for A's keys different from B.
+        for (var i = 0; i < keysA.length; i++) {
+            if (!hasOwnProperty.call(objB, keysA[i]) || !is(objA[keysA[i]], objB[keysA[i]])) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+        return new (P || (P = Promise))(function (resolve, reject) {
+            function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+            function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+            function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+            step((generator = generator.apply(thisArg, _arguments || [])).next());
+        });
+    };
+    Context.activeRouter = (function () {
+        let state = {};
+        const nextListeners = [];
+        function getDefaultState() {
+            return {
+                location: {
+                    pathname: Context.window.location.pathname,
+                    search: Context.window.location.search
+                }
+            };
+        }
+        function set(value) {
+            state = Object.assign({}, state, value);
+            dispatch();
+        }
+        function get(attrName) {
+            if (Object.keys(state).length === 0) {
+                return getDefaultState();
+            }
+            if (!attrName) {
+                return state;
+            }
+            return state[attrName];
+        }
+        function dispatch() {
+            return __awaiter(this, void 0, void 0, function* () {
+                const listeners = nextListeners;
+                const matchList = [];
+                const pathname = get('location').pathname;
+                // Assume listeners are ordered by group and then groupIndex
+                for (let i = 0; i < listeners.length; i++) {
+                    let match = null;
+                    const isGroupMatch = matchList.some(me => {
+                        return me[1] != null && me[2] != null && me[2] === listeners[i].groupId;
+                    });
+                    // If listener has a groupId and group already has a match then don't check
+                    if (!isGroupMatch) {
+                        match = listeners[i].isMatch(pathname);
+                        // If listener does not have a group then just check if it matches
+                    }
+                    else {
+                        match = null;
+                    }
+                    if (!shallowEqual(listeners[i].lastMatch, match)) {
+                        if (!isGroupMatch && listeners[i].groupId) {
+                            matchList.unshift([i, match, listeners[i].groupId]);
+                        }
+                        else {
+                            matchList.push([i, match, listeners[i].groupId]);
+                        }
+                    }
+                    listeners[i].lastMatch = match;
+                }
+                for (const [listenerIndex, matchResult, groupId] of matchList) {
+                    if (groupId && matchResult != null) {
+                        yield listeners[listenerIndex].listener(matchResult);
+                    }
+                    else {
+                        listeners[listenerIndex].listener(matchResult);
+                    }
+                }
+            });
+        }
+        function addListener(routeSubscription) {
+            const pathname = get('location').pathname;
+            const match = routeSubscription.isMatch(pathname);
+            routeSubscription.lastMatch = match;
+            routeSubscription.listener(match);
+            // If the new route does not have a group then add to the end of the list
+            // If this is the first item push it on the list.
+            if (routeSubscription.groupId == null || routeSubscription.groupIndex == null || nextListeners.length === 0) {
+                nextListeners.push(routeSubscription);
+            }
+            else {
+                for (let i = 0; i < nextListeners.length; i++) {
+                    const { groupId, groupIndex } = nextListeners[i];
+                    if (groupId == null) {
+                        nextListeners.splice(i, 0, routeSubscription);
+                        break;
+                    }
+                    if (groupId === routeSubscription.groupId && groupIndex > routeSubscription.groupIndex) {
+                        nextListeners.splice(i, 0, routeSubscription);
+                        break;
+                    }
+                }
+            }
+        }
+        function removeListener(routeSubscription) {
+            const index = nextListeners.indexOf(routeSubscription);
+            nextListeners.splice(index, 1);
+        }
+        /**
+         * Subscribe to the router for changes
+         * The callback that is returned should be used to unsubscribe.
+         */
+        function subscribe(routeSubscription) {
+            addListener(routeSubscription);
+            let isSubscribed = true;
+            return function unsubscribe() {
+                if (!isSubscribed) {
+                    return;
+                }
+                removeListener(routeSubscription);
+                isSubscribed = false;
+            };
+        }
+        return {
+            set,
+            get,
+            subscribe,
+            dispatch
+        };
+    })();
 })(resourcesUrl);
 })("App");
