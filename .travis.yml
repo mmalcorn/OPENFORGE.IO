@@ -1,0 +1,27 @@
+language: node_js
+
+node_js:
+- '8.11'
+
+cache:
+  directories:
+    - ~/.npm
+    - node_modules
+
+install:
+- npm install
+
+before_script:
+- npm start -- --silent &
+
+branches:
+  only:
+  - develop
+
+script:
+- npm run cypress:run
+- npm run build
+# - npm run firebase:deploy
+
+ notifications:
+    slack: openforge:n8Bg76pFsbvmZklroYUQ1Klt
